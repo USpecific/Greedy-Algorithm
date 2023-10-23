@@ -1,0 +1,54 @@
+class Graph:
+    _graph_dict = {}
+    _directed = False
+def GreedySearch(graph,node,destination,visited):
+    for Node in visited:
+        if Node == destination:
+            return visited
+    if node not in visited:
+        visited.append(node)
+        for neighbourNode,neighborDict in graph.items():
+            if neighbourNode == node:
+                for index in visited:
+                    nearNode = list(oneStoreyDictMin(neighborDict,index).keys())[0]
+                    if nearNode == destination:
+                        visited.append(destination)
+                        return visited
+                    if nearNode not in visited and nearNode != destination:
+                        GreedySearch(graph, nearNode,destination,visited)
+
+    return visited
+def oneStoreyDictMin(yourDict,ExceptforIndex):
+    li = []
+    resDict = {}
+    for key,values in yourDict.items():
+        if key != ExceptforIndex:
+            li.append(values)
+    minKey = min(li)
+    for x, y in yourDict.items():
+        if x != ExceptforIndex:
+            if y == minKey:
+                resDict.update(dict([(x, y)]))
+    if not resDict:
+        print("There is no result")
+    return resDict
+if __name__ == "__main__":
+    graph = Graph()
+    graph = {
+        'A': {'K': 5, 'R': 20},
+        'B': {'N': 15, "L": 25},
+        'C': {'J': 70, 'E': 20},
+        'E': {'C': 20, 'Q': 20, 'W': 30},
+        'F': {'G': 65, 'H': 45, 'P': 65, 'W': 55},
+        'G': {'R': 35, 'K': 40, 'F': 65},
+        'H': {'L': 70, 'F': 45},
+        'J': {'C': 70},
+        'K': {'A': 5, 'G': 40},
+        'L': {'H': 70, 'B': 25},
+        'N': {'P': 20, 'B': 15},
+        'P': {'N': 20, 'F': 70},
+        'Q': {'E': 20},
+        'R': {'A': 20, 'G': 35},
+        'W': {'E': 30, 'F': 55}
+    }
+    print(GreedySearch(graph, 'B', 'F',[]))
