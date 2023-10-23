@@ -1,6 +1,9 @@
+#This class is used to describe a undirected graph
+
 class Graph:
     _graph_dict = {}
     _directed = False
+
 def GreedySearch(graph,node,destination,visited):
     for Node in visited:
         if Node == destination:
@@ -18,6 +21,13 @@ def GreedySearch(graph,node,destination,visited):
                         GreedySearch(graph, nearNode,destination,visited)
 
     return visited
+
+
+#This function is used to find the minimize numebr in a dictionary which contains key in String and value in number
+#@result:A dictionary which contains the minimmum number and its key
+#@para: yourDict is the dictionary,ExceptforIndex is used to exclude the node which has passed
+#@author:USpecific
+
 def oneStoreyDictMin(yourDict,ExceptforIndex):
     li = []
     resDict = {}
